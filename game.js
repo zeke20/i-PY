@@ -1,4 +1,7 @@
-class ObjectToFind {
+    //commit test 
+    
+    
+    class ObjectToFind {
     constructor(name, x, y, width, height) {
         this.name = name;
         this.x = x;
