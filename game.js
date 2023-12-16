@@ -38,6 +38,9 @@ let currentObjectIndex = 0; // Index of the current object to find
 let clicks = 0; // Number of clicks made
 const maxClicks = 3; // Maximum allowed clicks
 
+let timeLimit = 20; // Time limit for the game in seconds
+let timeLeft = timeLimit;
+
 // Function to draw the scene
 function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -63,6 +66,23 @@ function drawScene() {
     // Set the source URL of the scene image
     sceneImage.src = "https://i.ibb.co/qMT7cqC/IMG-7205.jpg"; // Replace with your image URL
 }
+
+// Function to update the timer and handle time-based events
+function updateTimer() {
+    if (timeLeft > 0) {
+        timeLeft--;
+        drawScene(); // Redraw the scene to update the time left
+        setTimeout(updateTimer, 1000);
+    } else {
+        timeLeft = 0;
+        drawScene();
+        alert("Time's up! Game over.");
+        canvas.removeEventListener("click", handleClick);
+    }
+}
+
+// Uncomment the following line to start the timer
+updateTimer();
 
 // Event handler for mouse clicks on the canvas
 function handleClick(event) {
