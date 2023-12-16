@@ -92,22 +92,6 @@ function handleClick(event) {
     drawScene();
 }
 
-let timeLimit = 20; // Time limit for the game in seconds
-let timeLeft = timeLimit;
-
-// Function to update the timer and handle time-based events
-function updateTimer() {
-    if (timeLeft > 0) {
-        timeLeft--;
-        drawScene(); // Redraw the scene to update the time left
-        setTimeout(updateTimer, 1000);
-    } else {
-        timeLeft = 0;
-        drawScene();
-        alert("Time's up! Game over.");
-        canvas.removeEventListener("click", handleClick);
-    }
-}
 
 // Add a click event listener to the canvas
 canvas.addEventListener("click", handleClick);
