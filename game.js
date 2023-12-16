@@ -53,19 +53,6 @@ function drawScene() {
         // Get the current object to find
         const currentObject = objectsToFind[currentObjectIndex];
         
-        
-        // Draw a red rectangle around the current object if not found
-        if (!currentObject.found) {
-            ctx.strokeStyle = "red";
-            ctx.lineWidth = 2;
-            ctx.strokeRect(
-                currentObject.x,
-                currentObject.y,
-                currentObject.width,
-                currentObject.height
-            );
-        }
-        
 
         // Display the number of clicks
         ctx.fillStyle = "black";
