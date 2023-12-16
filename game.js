@@ -1,7 +1,4 @@
-    //commit test 4
-    
-    
-    class ObjectToFind {
+class ObjectToFind {
     constructor(name, x, y, width, height) {
         this.name = name;
         this.x = x;
@@ -24,8 +21,6 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-
-
 canvas.width = 800;
 canvas.height = 600;
 
@@ -42,26 +37,29 @@ function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const sceneImage = new Image();
+    sceneImage.onload = function () {
+        ctx.drawImage(sceneImage, 0, 0, canvas.width, canvas.height);
+
+        const currentObject = objectsToFind[currentObjectIndex];
+        if (!currentObject.found) {
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(
+                currentObject.x,
+                currentObject.y,
+                currentObject.width,
+                currentObject.height
+            );
+        }
+
+        ctx.fillStyle = "black";
+        ctx.font = "20px Arial";
+        ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
+
+        // ctx.fillText(`Time Left: ${timeLimit - timeLeft}s`, canvas.width - 150, 30);
+    };
+
     sceneImage.src = "https://i.ibb.co/qMT7cqC/IMG-7205.jpg"; // Replace with your image URL
-    ctx.drawImage(sceneImage, 0, 0, canvas.width, canvas.height);
-
-    const currentObject = objectsToFind[currentObjectIndex];
-    if (!currentObject.found) {
-        ctx.strokeStyle = "red";
-        ctx.lineWidth = 2;
-        ctx.strokeRect(
-            currentObject.x,
-            currentObject.y,
-            currentObject.width,
-            currentObject.height
-        );
-    }
-
-    ctx.fillStyle = "black";
-    ctx.font = "20px Arial";
-    ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
-
-    ctx.fillText(`Time Left: ${timeLimit - timeLeft}s`, canvas.width - 150, 30);
 }
 
 function handleClick(event) {
@@ -74,9 +72,8 @@ function handleClick(event) {
     if (!currentObject.found && currentObject.isClicked(mouseX, mouseY)) {
         currentObject.found = true;
         clicks++;
-            alert("Congratulations! You found the object.");
-            canvas.removeEventListener("click", handleClick);
-        
+        alert("Congratulations! You found the object.");
+        canvas.removeEventListener("click", handleClick);
     } else if (!currentObject.found) {
         clicks++;
     }
@@ -93,9 +90,9 @@ let timeLimit = 20;
 let timeLeft = timeLimit;
 
 function updateTimer() {
-    if(timeLeft > 0) {
+    if (timeLeft > 0) {
         timeLeft--;
-        drawScene();                    // Redraw the scene to update the time left
+        drawScene(); // Redraw the scene to update the time left
         setTimeout(updateTimer, 1000);
     } else {
         timeLeft = 0;
@@ -104,7 +101,7 @@ function updateTimer() {
         canvas.removeEventListener("click", handleClick);
     }
 }
+
 canvas.addEventListener("click", handleClick);
 
 drawScene();
-
