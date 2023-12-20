@@ -55,7 +55,7 @@ a {
   text-align: right;
 }
 
-.banner a:nth-child(2) {
+.banner div:nth-child(2) {
   padding-left: 20px;
 }
 
