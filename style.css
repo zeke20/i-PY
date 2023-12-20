@@ -24,7 +24,11 @@ h1 {
   font-family: 'Space Mono', monospace;
 }
 
+.title {
+  text-align: center;
+}
 
 .banner {
   background-color: var(--green);
+  width: 100%;
 }
