@@ -58,3 +58,12 @@ a {
 .banner a:nth-child(2) {
   padding-left: 20px;
 }
+
+.body{
+  margin: 0;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 75%;
+}
