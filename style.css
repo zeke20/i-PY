@@ -23,6 +23,10 @@ html {
 body {
   background-color: var(--white);
   color: var(--black);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 h1 {
@@ -124,4 +128,17 @@ button{
   margin: auto;
   margin-top: 15px;
   display: block;
+}
+
+
+/* Footer Stuff */
+.footer {
+  padding: 20px;
+  background-color: var(--black);
+}
+
+.footer p{
+  color: var(--white);
+  text-align: center;
+  font-size: .7em;
 }
