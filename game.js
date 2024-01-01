@@ -21,7 +21,7 @@ class ObjectToFind {
 }
 
 // Get the canvas and its 2D rendering context
-const canvas = document.querySelector("canvas");
+const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 // Set the dimensions of the canvas
@@ -65,24 +65,7 @@ function drawScene() {
 
     // Set the source URL of the scene image
     sceneImage.src = "https://i.ibb.co/qMT7cqC/IMG-7205.jpg"; // Replace with your image URL
-}
-
-// Function to update the timer and handle time-based events
-function updateTimer() {
-    if (timeLeft > 0) {
-        timeLeft--;
-        drawScene(); // Redraw the scene to update the time left
-        setTimeout(updateTimer, 1000);
-    } else {
-        timeLeft = 0;
-        drawScene();
-        alert("Time's up! Game over.");
-        canvas.removeEventListener("click", handleClick);
-    }
-}
-
-// Uncomment the following line to start the timer
-updateTimer();
+};
 
 // Event handler for mouse clicks on the canvas
 function handleClick(event) {
