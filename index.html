@@ -8,10 +8,12 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
         <title>i$py</title>
+        <script src="game.js" defer></script>
     </head>
     <body>
 
         <!-- Header -->
+        <script src="game.js" defer></script>
         <div class="banner">
             <a href="index.html">i$py.com</a>
             <div>
@@ -31,6 +33,7 @@
           <h2>Welcome!</h2>
           <p>This is a quick synopisis of the game. It will encourage the visistor to play the game!</p>
           <button>play</button>
+          <button id="playButton">Play</button>
         </div>
 
         <!-- Footer -->
@@ -38,12 +41,25 @@
           <p>Developed by Zeke, Edna, Jeremy, & Rickoi</p>
           <p>Copyright © 2023 i$py.com</p>
         </div>
+
+        <script>
+          // Function to start the game
+          function startGame() {
+              // Call the startGame function from game.js
+              if (typeof startGame === "function") {
+                  startGame();
+              }
+          }
+  
+          // Add an event listener to the "Play" button
+          const playButton = document.getElementById("playButton");
+          playButton.addEventListener("click", startGame);
+      </script>
           
 
     </body>
 </html>
 
 
-    <canvas class="game-canvas"></canvas>
-    <script src="game.js"></script>
+    
 
