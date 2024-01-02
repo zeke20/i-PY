@@ -25,8 +25,8 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 // Set the dimensions of the canvas
-canvas.width = 800;
-canvas.height = 600;
+canvas.width = 400;
+canvas.height = 300;
 
 // Array of objects to be found in the scene
 const objectsToFind = [
