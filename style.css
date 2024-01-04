@@ -142,3 +142,23 @@ button{
   text-align: center;
   font-size: .7em;
 }
+
+/* For centering the gamepage html picture */
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#gameContainer {
+  background-color: white; /* Set white background */
+  padding: 20px; /* Add padding for white space */
+  border: 1px solid #ccc; /* Optional: Add a border for visual separation */
+}
+
+#gameCanvas {
+  display: block;
+  margin: 0 auto; /* Center the canvas within its container */
+}
