@@ -48,10 +48,19 @@
               // Call the startGame function from game.js
               window.location.href = "gamepage.html";
           }
+
+          //Function to change color of play button when mouse hovers over it
+          function mouseOver(){
+            document.getElementById("playButton").style.color = "red";
+          }
   
           // Add an event listener to the "Play" button
           const playButton = document.getElementById("playButton");
           playButton.addEventListener("click", startGame);
+          //Add an event listener that changes color of play button when mouse hovers over it
+          playButton.addEventListener("onmouseover", mouseOver);
+
+
       </script>
           
 
