@@ -42,7 +42,7 @@ let timeLimit = 20; // Time limit for the game in seconds
 let timeLeft = timeLimit;
 
 //Set the source URL of the scene image
-    const gameImage = new GameImage("https://i.ibb.co/qMT7cqC/IMG-7205.jpg", objectsToFind);
+    //const gameImage = new GameImage("https://i.ibb.co/qMT7cqC/IMG-7205.jpg", objectsToFind);
 
 // Function to draw the scene
 function drawScene() {
@@ -64,6 +64,7 @@ function drawScene() {
         ctx.fillStyle = "black";
         ctx.font = "20px Arial";
         ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
+        const gameImage = new GameImage("https://i.ibb.co/qMT7cqC/IMG-7205.jpg", objectsToFind);
     };
 
 };
