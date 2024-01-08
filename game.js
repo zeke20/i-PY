@@ -44,7 +44,7 @@ let timeLeft = timeLimit;
 // Function to draw the scene
 function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    gameImage.draw(ctx);
     // Create an image element for the scene
     const sceneImage = new Image();
     
@@ -73,15 +73,15 @@ function handleClick(event) {
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
 
-    const currentObject = objectsToFind[currentObjectIndex];
+    const clickedObject = gameImage.isObjectClicked(mouseX, mouseY);
 
     // Check if the clicked position overlaps with the current object
-    if (!currentObject.found && currentObject.isClicked(mouseX, mouseY)) {
+    if (clickedObject) {
         currentObject.found = true;
         clicks++;
         alert("Congratulations! You found the object.");
         canvas.removeEventListener("click", handleClick);
-    } else if (!currentObject.found) {
+    } else {
         clicks++;
     }
 
@@ -102,5 +102,4 @@ canvas.addEventListener("click", handleClick);
 // Draw the initial scene
 drawScene();
 
-// Uncomment the following line to start the timer (if needed)
-// updateTimer();
+
