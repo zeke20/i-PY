@@ -41,32 +41,19 @@ const maxClicks = 3; // Maximum allowed clicks
 let timeLimit = 20; // Time limit for the game in seconds
 let timeLeft = timeLimit;
 
+//Set the source URL of the scene image
+ const gameImage = new GameImage("https://i.ibb.co/qMT7cqC/IMG-7205.jpg", objectsToFind);
+
 // Function to draw the scene
-function drawScene() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    gameImage.draw(ctx);
-    // Create an image element for the scene
-    const sceneImage = new Image();
-    
-    // Callback for when the scene image is loaded
-    sceneImage.onload = function () {
-        // Draw the scene image on the canvas
-        ctx.drawImage(sceneImage, 0, 0, canvas.width, canvas.height);
-
-        // Get the current object to find
-        const currentObject = objectsToFind[currentObjectIndex];
-        
-
-        // Display the number of clicks
-        ctx.fillStyle = "black";
-        ctx.font = "20px Arial";
-        ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
-    };
-
-    // Set the source URL of the scene image
-    sceneImage.src = "https://i.ibb.co/qMT7cqC/IMG-7205.jpg"; // Replace with your image URL
-};
-
+function drawScene() {   
+        // Create an image element for the scene
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        gameImage.draw(ctx);
+         // Display the number of clicks
+         ctx.fillStyle = "black";
+         ctx.font = "20px Arial";
+          ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
+}
 // Event handler for mouse clicks on the canvas
 function handleClick(event) {
     const rect = canvas.getBoundingClientRect();
