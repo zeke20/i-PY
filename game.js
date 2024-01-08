@@ -63,7 +63,7 @@ function handleClick(event) {
 
     // Check if the clicked position overlaps with the current object
     if (clickedObject) {
-        currentObject.found = true;
+        currentObject.isObjectClicked = true;
         clicks++;
         alert("Congratulations! You found the object.");
         canvas.removeEventListener("click", handleClick);
