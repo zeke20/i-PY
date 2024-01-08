@@ -41,15 +41,12 @@ const maxClicks = 3; // Maximum allowed clicks
 let timeLimit = 20; // Time limit for the game in seconds
 let timeLeft = timeLimit;
 
-//Set the source URL of the scene image
-    //const gameImage = new GameImage("https://i.ibb.co/qMT7cqC/IMG-7205.jpg", objectsToFind);
-
 // Function to draw the scene
 function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    gameImage.draw(ctx);
+
     // Create an image element for the scene
-    const sceneImage = gameImage;
+    const sceneImage = new Image();
     
     // Callback for when the scene image is loaded
     sceneImage.onload = function () {
@@ -64,9 +61,10 @@ function drawScene() {
         ctx.fillStyle = "black";
         ctx.font = "20px Arial";
         ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
-        const gameImage = new GameImage("https://i.ibb.co/qMT7cqC/IMG-7205.jpg", objectsToFind);
     };
 
+    // Set the source URL of the scene image
+    sceneImage.src = "https://i.ibb.co/qMT7cqC/IMG-7205.jpg"; // Replace with your image URL
 };
 
 // Event handler for mouse clicks on the canvas
@@ -83,7 +81,7 @@ function handleClick(event) {
         clicks++;
         alert("Congratulations! You found the object.");
         canvas.removeEventListener("click", handleClick);
-    } else {
+    } else if (!currentObject.found) {
         clicks++;
     }
 
