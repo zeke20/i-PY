@@ -22,3 +22,4 @@ class GameImage {
         return null;
     }
 }
+/*rickoi comment*/
