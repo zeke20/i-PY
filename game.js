@@ -18,15 +18,32 @@ class ObjectToFind {
             mouseY <= this.y + this.height
         );
     }
+
+    // Check if the click is within the hitbox dimensions
+    isWithinHitbox(mouseX, mouseY) {
+        const hitboxX = this.x + (this.width - this.hitboxWidth) / 2;
+        const hitboxY = this.y + (this.height - this.hitboxHeight) / 2;
+
+        return (
+            mouseX >= hitboxX &&
+            mouseX <= hitboxX + this.hitboxWidth &&
+            mouseY >= hitboxY &&
+            mouseY <= hitboxY + this.hitboxHeight
+        );
+    }
+
 }
+
+
+
 
 // Get the canvas and its 2D rendering context
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 // Set the dimensions of the canvas
-canvas.width = 400;
-canvas.height = 300;
+canvas.width = 500; //was 400
+canvas.height = 400; //was 300
 
 // Array of objects to be found in the scene
 const objectsToFind = [
@@ -47,11 +64,13 @@ function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     gameImage.draw(ctx);
 
-    // Display the number of clicks
-    ctx.fillStyle = "black";
-    ctx.font = "20px Arial";
-    ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
-}
+        // Display the number of clicks
+        ctx.fillStyle = "black";
+        ctx.font = "20px Arial";
+        ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
+    };
+
+
 
 // Event handler for mouse clicks on the canvas
 function handleClick(event) {
@@ -61,15 +80,23 @@ function handleClick(event) {
 
     const clickedObject = gameImage.isObjectClicked(mouseX, mouseY);
 
-    // Check if the clicked position overlaps with the current object
-    if (clickedObject) {
-        currentObject.isObjectClicked = true;
-        clicks++;
+    //Increment clicks
+    clicks++;
+
+    // Display the number of clicks
+    ctx.clearRect(0, 0, 150, 50); // Clear the previous clicks display
+    ctx.fillStyle = "black";
+    ctx.font = "20px Arial";
+    ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
+    
+
+// Check if the clicked position overlaps with the current object
+if (clickedObject) {
+    if (!clickedObject.found) {
+        clickedObject.found = true;
         alert("Congratulations! You found the object.");
-        canvas.removeEventListener("click", handleClick);
-    } else if (!currentObject.found) {
-        clicks++;
     }
+}
 
     // Check if the maximum allowed clicks is reached
     if (clicks >= maxClicks) {
@@ -77,8 +104,9 @@ function handleClick(event) {
         canvas.removeEventListener("click", handleClick);
     }
 
-    // Redraw the scene after handling the click
-    drawScene();
+
+// Redraw the scene after handling the click
+drawScene();
 }
 
 
@@ -87,6 +115,10 @@ function handleClick(event) {
 canvas.addEventListener("click", handleClick);
 
 // Draw the initial scene
-drawScene();
+gameImage.image.onload = () => {
+    drawScene();
+    canvas.addEventListener("click", handleClick);
+};
+
 
 

@@ -3,6 +3,12 @@ class GameImage {
         this.image = new Image();
         this.image.src = "https://i.ibb.co/qMT7cqC/IMG-7205.jpg"; // Set the image URL here
         this.objectsToFind = objectsToFind; // Array of ObjectToFind instances
+        
+        // Draw the initial scene
+this.image.onload = () => {
+    this.drawScene();
+};
+
     }
 
     draw(ctx) {
@@ -22,4 +28,3 @@ class GameImage {
         return null;
     }
 }
-/*rickoi comment*/
