@@ -10,6 +10,22 @@
         <title>i$py</title>
         <script src="gameImage.js" defer></script>
         <script src="game.js" defer></script>
+    <style>
+        /* Default button style */
+        #playButton {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Button style on hover */
+        #playButton:hover {
+            background-color: #2980b9;
+        }
+    </style>
     </head>
     <body>
      
@@ -50,15 +66,7 @@
           }
 
           //Function to change color of play button when mouse hovers over it
-          function mouseOver(){
-            document.getElementById("playButton").style.color = "red";
-          }
-  
-          // Add an event listener to the "Play" button
-          const playButton = document.getElementById("playButton");
-          playButton.addEventListener("click", startGame);
-           //Add an event listener that changes color of play button when mouse hovers over it
-           playButton.addEventListener("onmouseover", mouseOver);
+         
       </script>
 
        
