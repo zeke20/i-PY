@@ -18,15 +18,32 @@ class ObjectToFind {
             mouseY <= this.y + this.height
         );
     }
+
+    // Check if the click is within the hitbox dimensions
+    isWithinHitbox(mouseX, mouseY) {
+        const hitboxX = this.x + (this.width - this.hitboxWidth) / 2;
+        const hitboxY = this.y + (this.height - this.hitboxHeight) / 2;
+
+        return (
+            mouseX >= hitboxX &&
+            mouseX <= hitboxX + this.hitboxWidth &&
+            mouseY >= hitboxY &&
+            mouseY <= hitboxY + this.hitboxHeight
+        );
+    }
+
 }
+
+
+
 
 // Get the canvas and its 2D rendering context
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 // Set the dimensions of the canvas
-canvas.width = 400;
-canvas.height = 300;
+canvas.width = 500; //was 400
+canvas.height = 400; //was 300
 
 // Array of objects to be found in the scene
 const objectsToFind = [
@@ -41,21 +58,11 @@ const maxClicks = 3; // Maximum allowed clicks
 let timeLimit = 20; // Time limit for the game in seconds
 let timeLeft = timeLimit;
 
-// Function to draw the scene
+const gameImage = new GameImage("https://i.ibb.co/qMT7cqC/IMG-7205.jpg", objectsToFind);
+
 function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Create an image element for the scene
-    const sceneImage = new Image();
-    
-    // Callback for when the scene image is loaded
-    sceneImage.onload = function () {
-        // Draw the scene image on the canvas
-        ctx.drawImage(sceneImage, 0, 0, canvas.width, canvas.height);
-
-        // Get the current object to find
-        const currentObject = objectsToFind[currentObjectIndex];
-        
+    gameImage.draw(ctx);
 
         // Display the number of clicks
         ctx.fillStyle = "black";
@@ -63,9 +70,7 @@ function drawScene() {
         ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
     };
 
-    // Set the source URL of the scene image
-    sceneImage.src = "https://i.ibb.co/qMT7cqC/IMG-7205.jpg"; // Replace with your image URL
-};
+
 
 // Event handler for mouse clicks on the canvas
 function handleClick(event) {
@@ -73,17 +78,25 @@ function handleClick(event) {
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
 
-    const currentObject = objectsToFind[currentObjectIndex];
+    const clickedObject = gameImage.isObjectClicked(mouseX, mouseY);
 
-    // Check if the clicked position overlaps with the current object
-    if (!currentObject.found && currentObject.isClicked(mouseX, mouseY)) {
-        currentObject.found = true;
-        clicks++;
+    //Increment clicks
+    clicks++;
+
+    // Display the number of clicks
+    ctx.clearRect(0, 0, 150, 50); // Clear the previous clicks display
+    ctx.fillStyle = "black";
+    ctx.font = "20px Arial";
+    ctx.fillText(`Clicks: ${clicks}/${maxClicks}`, 10, 30);
+    
+
+// Check if the clicked position overlaps with the current object
+if (clickedObject) {
+    if (!clickedObject.found) {
+        clickedObject.found = true;
         alert("Congratulations! You found the object.");
-        canvas.removeEventListener("click", handleClick);
-    } else if (!currentObject.found) {
-        clicks++;
     }
+}
 
     // Check if the maximum allowed clicks is reached
     if (clicks >= maxClicks) {
@@ -91,16 +104,21 @@ function handleClick(event) {
         canvas.removeEventListener("click", handleClick);
     }
 
-    // Redraw the scene after handling the click
-    drawScene();
+
+// Redraw the scene after handling the click
+drawScene();
 }
+
 
 
 // Add a click event listener to the canvas
 canvas.addEventListener("click", handleClick);
 
 // Draw the initial scene
-drawScene();
+gameImage.image.onload = () => {
+    drawScene();
+    canvas.addEventListener("click", handleClick);
+};
 
-// Uncomment the following line to start the timer (if needed)
-// updateTimer();
+
+
